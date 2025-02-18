@@ -1,90 +1,412 @@
-@unpublished{firouznia22,
-    Author = {M. Firouznia and S. H. Bryngelson and D. Saintillan},
-    Title = {A spectral boundary integral method for simulating electrohydrodynamic flows in viscous drops},
-    note = {arXiv: 2210.04957},
-    arxiv = {2210.04957},
-    year = {2022},
+@article{bptree,
+author = {Xu, Helen and Li, Amanda and Wheatman, Brian and Marneni, Manoj and Pandey, Prashant},
+title = {BP-Tree: Overcoming the Point-Range Operation Tradeoff for In-Memory B-Trees},
+year = {2023},
+issue_date = {July 2023},
+publisher = {VLDB Endowment},
+volume = {16},
+number = {11},
+abstract = {B-trees are the go-to data structure for in-memory indexes in databases and storage systems. B-trees support both point operations (i.e., inserts and finds) and range operations (i.e., iterators and maps). However, there is an inherent tradeoff between point and range operations since the optimal node size for point operations is much smaller than the optimal node size for range operations. Existing implementations use a relatively small node size to achieve fast point operations at the cost of range operation throughput.We present the BP-tree, a variant of the B-tree, that overcomes the decades-old point-range operation tradeoff in traditional B-trees. In the BP-tree, the leaf nodes are much larger in size than the internal nodes to support faster range scans. To avoid any slowdown in point operations due to large leaf nodes, we introduce a new insert-optimized array called the buffered partitioned array (BPA) to efficiently organize data in leaf nodes. The BPA supports fast insertions by delaying ordering the keys in the array. This results in much faster range operations and faster point operations at the same time in the BP-tree.Our experiments show that on 48 hyperthreads, on workloads generated from the Yahoo! Cloud Serving Benchmark (YCSB), the BP-tree supports similar or faster point operation throughput (between .94\texttimes{}-1.2\texttimes{} faster) compared to Masstree and OpenBw-tree, two state-of-the-art in-memory key-value (KV) stores. On a YCSB workload with short scans, the BP-tree is about 7.4\texttimes{} faster than Masstree and 1.6\texttimes{} faster than OpenBw-tree. Furthermore, we extend the YCSB to add large range workloads, commonly found in database applications, and show that the BP-tree is 30\texttimes{} faster than Masstree and 2.5\texttimes{} faster than OpenBw-tree.We also provide a reference implementation for a concurrent B+-tree and find that the BP-tree supports faster (between 1.03\texttimes{}-1.2\texttimes{} faster) point operations when compared to the best-case configuration for B+-trees for point operations while supporting similar performance (about .95\texttimes{} as fast) on short range operations and faster (about 1.3\texttimes{} faster) long range operations.},
+journal = {Proc. VLDB Endow.},
+month = jul,
+pages = {2976–2989},
+numpages = {14}
+}
+
+@article{byo,
+author = {Wheatman, Brian and Dong, Xiaojun and Shen, Zheqi and Dhulipala, Laxman and \L{}\k{a}cki, Jakub and Pandey, Prashant and Xu, Helen},
+title = {BYO: A Unified Framework for Benchmarking Large-Scale Graph Containers},
+year = {2024},
+issue_date = {May 2024},
+publisher = {VLDB Endowment},
+volume = {17},
+number = {9},
+abstract = {A fundamental building block in any graph algorithm is a graph container -- a data structure used to represent the graph. Ideally, a graph container enables efficient access to the underlying graph, has low space usage, and supports updating the graph efficiently. In this paper, we conduct an extensive empirical evaluation of graph containers designed to support running algorithms on large graphs. To our knowledge, this is the first apples-to-apples comparison of graph containers rather than overall systems, which include confounding factors such as differences in algorithm implementations and infrastructure.We measure the running time of 10 highly-optimized algorithms across over 20 different containers and 10 graphs. Somewhat surprisingly, we find that the average algorithm running time does not differ much across containers, especially those that support dynamic updates. Specifically, a simple container based on an off-the-shelf B-tree is only 1.22\texttimes{} slower on average than a highly optimized static one. Moreover, we observe that simplifying a graph-container Application Programming Interface (API) to only a few simple functions incurs a mere 1.16\texttimes{} slowdown compared to a complete API. Finally, we also measure batch-insert throughput in dynamic-graph containers for a full picture of their performance.To perform the benchmarks, we introduce BYO, a unified framework that standardizes evaluations of graph-algorithm performance across different graph containers. BYO extends the Graph Based Benchmark Suite (Dhulipala et al. 18), a state-of-the-art graph algorithm benchmark, to easily plug into different dynamic graph containers and enable fair comparisons between them on a large suite of graph algorithms. While several graph algorithm benchmarks have been developed to date, to the best of our knowledge, BYO is the first system designed to benchmark graph containers.},
+journal = {Proc. VLDB Endow.},
+month = may,
+pages = {2307–2320},
+numpages = {14},
     options = {extsym={*}},
 }
 
-@article{panchal22,
-    Author = {A. Panchal and S. H. Bryngelson and S. Menon},
-    Title = {A seven-equation diffused interface method for resolved multiphase flows},
-    journal = {Journal of Computational Physics},
-    volume = {475},
-    pages = {111870},
-    year = {2023},
-    doi = {10.1016/j.jcp.2022.111870},
-    options = {extsym={*}},
+@inproceedings{cpma,
+author = {Wheatman, Brian and Burns, Randal and Buluc, Aydin and Xu, Helen},
+title = {CPMA: An Efficient Batch-Parallel Compressed Set Without Pointers},
+year = {2024},
+abstract = {This paper introduces the batch-parallel Compressed Packed Memory Array (CPMA), a compressed, dynamic, ordered set data structure based on the Packed Memory Array (PMA). Traditionally, batch-parallel sets are built on pointer-based data structures such as trees because pointer-based structures enable fast parallel unions via pointer manipulation. When compared with cache-optimized trees, PMAs were slower to update but faster to scan.The batch-parallel CPMA overcomes this tradeoff between updates and scans by optimizing for cache-friendliness. On average, the CPMA achieves 3\texttimes{} faster batch-insert throughput and 4\texttimes{} faster range-query throughput compared with compressed PaC-trees, a state-of-the-art batch-parallel set library based on cache-optimized trees.We further evaluate the CPMA compared with compressed PaC-trees and Aspen, a state-of-the-art system, on a real-world application of dynamic-graph processing. The CPMA is on average 1.2\texttimes{} faster on a suite of graph algorithms and 2\texttimes{} faster on batch inserts when compared with compressed PaC-trees. Furthermore, the CPMA is on average 1.3\texttimes{} faster on graph algorithms and 2\texttimes{} faster on batch inserts compared with Aspen.},
+booktitle = {Proceedings of the 29th ACM SIGPLAN Annual Symposium on Principles and Practice of Parallel Programming (PPoPP)},
+numpages = {16},
+keywords = {packed memory array, batch-parallel, compression, data structures, dynamic graphs},
+options = {extsym={*}},
 }
 
-@article{bryngelson16_PRF,
-    Author = {S. H. Bryngelson and J. B. Freund},
-    Journal = {Physical Review Fluids},
-    Number = {3},
-    Pages = {033201},
-    Title = {Capsule-train stability},
-    Volume = {1},
-    Year = {2016},
-    doi = {10.1103/PhysRevFluids.1.033201},
+@inproceedings{terrace,
+author = {Pandey, Prashant and Wheatman, Brian and Xu, Helen and Buluc, Aydin},
+title = {Terrace: A Hierarchical Graph Container for Skewed Dynamic Graphs},
+year = {2021},
+publisher = {Association for Computing Machinery},
+abstract = {Various applications model problems as streaming graphs, which need to quickly apply a stream of updates and run algorithms on the updated graph. Furthermore, many dynamic real-world graphs, such as social networks, follow a skewed distribution of vertex degrees, where there are a few high-degree vertices and many low-degree vertices.Existing static graph-processing systems optimized for graph skewness achieve high performance and low space usage by preprocessing a cache-efficient graph partitioning based on vertex degree. In the streaming setting, the whole graph is not available upfront, however, so finding an optimal partitioning is not feasible in the presence of updates. As a result, existing streaming graph-processing systems take a "one-size-fits-all" approach, leaving performance on the table.We present Terrace, a system for streaming graphs that uses a hierarchical data structure design to store a vertex's neighbors in different data structures depending on the degree of the vertex. This multi-level structure enables Terrace to dynamically partition vertices based on their degrees and adapt to skewness in the underlying graph.Our experiments show that Terrace supports faster batch insertions for batch sizes up to 1M when compared to Aspen, a state-of-the-art graph streaming system. On graph query algorithms, Terrace is between 1.7X--2.6X faster than Aspen and between 0.5X--1.3X as fast as Ligra, a state-of-the-art static graph-processing system.},
+booktitle = {Proceedings of the 2021 International Conference on Management of Data (SIGMOD)},
+pages = {1372–1385},
+keywords = {graph data structures, indexing, streaming},
 }
 
-@report{report_1,
-    Author = {S. H. Bryngelson and C. Pantano and D. Bodony and J. B. Freund},
-    Title = {Adjoint-based sensitivity for flows with shocks},
-    Institution = {Technical Report, XPACC},
-    Year = {2018},
+@report{xu2024dynamic,
+  title={Dynamic Graphs, End-to-End: Containers, Frameworks, and Benchmarks},
+  author={Xu, Helen},
+  institution={Bulletin of EATCS},
+  year={2024},
+  options = {extsym={*}},
 }
 
-@inproceedings{proceeding_14,
-    Author = {Q. Zeng and Y. Kothari and S. H. Bryngelson and F. Sch{\"a}fer},
-    Title = {Competitive physics informed networks},
-    Booktitle = {International Conference on Learning Representations (ICLR)},
-    Address = {Kigali, Rwanda},
-    year = {2023},
-    options = {extsym={*}},
+@inproceedings{doi:10.1137/1.9781611976830.17,
+author = {Helen Xu and Sean Fraser and Charles E. Leiserson},
+title = {Multidimensional Included and Excluded Sums},
+booktitle = {Proceedings of the SIAM Conference on Applied and Computational Discrete Algorithms (ACDA)},
+chapter = {},
+year={2021},
+    abstract = { Abstract This paper presents algorithms for the included-sums and excluded-sums problems used by scientific computing applications such as the fast multipole method. These problems are defined in terms of a d-dimensional array of N elements and a binary associative operator ⊕ on the elements. The included-sum problem requires that the elements within overlapping boxes cornered at each element within the array be reduced using ⊕. The excluded-sum problem reduces the elements outside each box. The weak versions of these problems assume that the operator ⊕ has an inverse ⊖, whereas the strong versions do not require this assumption. In addition to studying existing algorithms to solve these problems, we introduce three new algorithms. The bidirectional box-sum (BDBS) algorithm solves the strong included-sums problem in Θ(dN) time, asymptotically beating the classical summed-area table (SAT) algorithm, which runs in Θ(2dN) and which only solves the weak version of the problem. Empirically, the BDBS algorithm outperforms the SAT algorithm in higher dimensions by up to 17.1×. The box-complement algorithm solves the strong excluded-sums problem in Θ(dN) time, asymptotically beating the state-of-the-art corners algorithm by Demaine et al., which runs in Ω(2dN) time. The box-complement algorithm empirically outperforms the corners algorithm by about 1.4× given similar amounts of space in three dimensions. If the assumptions for the weak excluded-sums problem can be satisfied, the bidirectional box-sum complement (BDBSC) algorithm, which is a trivial extension of the BDBS algorithm, can beat box-complement by up to a factor of 4. }
 }
 
-@inproceedings{proceeding_11,
-    Author = {M. Rodriguez and S. H. Bryngelson and  T. Colonius},
+
+@inbook{doi:10.1137/1.9781611976472.3,
+author = {Brian Wheatman and Helen Xu},
+title = {A Parallel Packed Memory Array to Store Dynamic Graphs},
+booktitle = {2021 Proceedings of the Symposium on Algorithm Engineering and Experiments (ALENEX)},
+chapter = {},
+pages = {31-45},
+    abstract = { Abstract The ideal data structure for storing dynamic graphs would support fast updates as well as fast range queries which underlie graph traversals such as breadth-first search. The Packed Memory Array (PMA) seems like a good candidate for this setting because it supports fast updates as well as cache-efficient range queries. Concurrently updating a PMA raises challenges, however, because an update may require rewriting the entire structure. This paper introduces a parallel PMA with intra- and inter-operation parallelism and deadlock-free polylogarithmicspan operations. Our main observation is that the PMA is well-suited to concurrent updates despite occasionally requiring a rewrite of the entire structure because 1) most of the updates only write to a small part of the structure and 2) the worst case is highly parallel and cache-efficient. To evaluate our data structure, we implemented Parallel Packed Compressed Sparse Row (PPCSR), a dynamic-graph processing framework that extends the Ligra interface with graph updates. We show that PPCSR is on average about 1.6x faster on graph kernels than Aspen, a state-of-the-art graph-streaming system. PPCSR achieves up to 80 million updates per second and is 2 – 5x faster than Aspen on most batch sizes. Finally, PPCSR is competitive with Ligra and Ligra+, two state-of-the-art static graph-processing frameworks. }
+}
+
+
+
+@InProceedings{bhattacharya_et_al:LIPIcs.ESA.2022.16,
+  author =	{Bhattacharya, Arghya and Chowdhury, Abiyaz and Xu, Helen and Das, Rathish and Chowdhury, Rezaul A. and Johnson, Rob and Nithyanand, Rishab and Bender, Michael A.},
+  title =	{{When Are Cache-Oblivious Algorithms Cache Adaptive? A Case Study of Matrix Multiplication and Sorting}},
+  booktitle =	{30th Annual European Symposium on Algorithms (ESA)},
+  year =	{2022},
+  annote =	{Keywords: Cache-adaptive algorithms, cache-oblivious algorithms}
+}
+
+@INPROCEEDINGS{10363624,
+  author={Xu, Helen and Schardl, Tao B. and Pellauer, Michael and Emer, Joel S.},
+  booktitle={ IEEE High Performance Extreme Computing Conference (HPEC)},
+  title={Optimizing Compression Schemes for Parallel Sparse Tensor Algebra},
+  year={2023},
+  volume={},
+  number={},}
+
+@INPROCEEDINGS{prefix,
+  author={Sean Fraser and Helen Xu and Charles E. Leiserson},
+  booktitle={IEEE High Performance Extreme Computing Conference (HPEC)},
+  title={Work-efficient parallel algorithms for accurate floating-point prefix sums},
+  year={2020},
+  volume={},
+  number={},}
+
+
+@INPROCEEDINGS{bpcsr,
+  author={Wheatman, Brian and Burns, Randal and Xu, Helen},
+  booktitle={2024 IEEE High Performance Extreme Computing Conference (HPEC)},
+  title={Batch-Parallel Compressed Sparse Row: A Locality-Optimized Dynamic-Graph Representation},
+  year={2024},
+  volume={},
+  number={},
+  options = {extsym={*}},}
+
+
+@inproceedings{doi:10.1137/1.9781611976489.1,
+author = {Shahin Kamali and Helen Xu},
+title = {Beyond Worst-case Analysis of Multicore Caching Strategies},
+booktitle = {Symposium on Algorithmic Principles of Computer Systems (APOCS)},
+chapter = {},
+year={2021},
+    abstract = { Abstract Every processor with multiple cores sharing a cache needs to implement a cache-replacement algorithm. Previous work demonstrated that the competitive ratio of a large class of online algorithms, including Least-Recently-Used (LRU), grows with the length of the input. Furthermore, even offline algorithms like Furthest-In-Future, the optimal algorithm in single-core caching, cannot compete in the multicore setting. These negative results motivate a more in-depth comparison of multicore caching algorithms via alternative analysis measures. Specifically, the power of the adversary to adapt to online algorithms suggests the need for a direct comparison of online algorithms to each other. In this paper, we introduce cyclic analysis, a generalization of bijective analysis introduced by Angelopoulos et al. [SODA'07]. Cyclic analysis captures the advantages of bijective analysis while offering flexibility that makes it more useful for comparing algorithms for a variety online problems. In particular, we take the first steps beyond worst-case analysis for analysis of multicore caching algorithms. We use cyclic analysis to establish relationships between multicore caching algorithms, including the advantage of LRU over all other multicore caching algorithms in the presence of locality of reference. }
+}
+
+@inproceedings{10.1145/3354265.3354285,
+author = {Aimone, James B. and Parekh, Ojas and Phillips, Cynthia A. and Pinar, Ali and Severa, William and Xu, Helen},
+title = {Dynamic Programming with Spiking Neural Computing},
+year = {2019},
+abstract = {With the advent of large-scale neuromorphic platforms, we seek to better understand the applications of neuromorphic computing to more general-purpose computing domains. Graph analysis problems have grown increasingly relevant in the wake of readily available massive data. We demonstrate that a broad class of combinatorial and graph problems known as dynamic programs enjoy simple and efficient neuromorphic implementations, by developing a general technique to convert dynamic programs to spiking neuromorphic algorithms. Dynamic programs have been studied for over 50 years and have dozens of applications across many fields.},
+booktitle = {Proceedings of the International Conference on Neuromorphic Systems (ICONS)},
+articleno = {20},
+numpages = {9},
+}
+
+@INPROCEEDINGS{8425208,
+  author={Ahrens, Willow and Xu, Helen and Schiefer, Nicholas},
+  booktitle={2018 IEEE International Parallel and Distributed Processing Symposium (IPDPS)},
+  title={A Fill Estimation Algorithm for Sparse Matrices and Tensors in Blocked Formats},
+  year={2018},
+  volume={},
+  number={},
+  pages={546-556},
+  keywords={Tensile stress;Sparse matrices;Estimation;Complexity theory;Chemistry;Kernel;Runtime;Fill Estimation;Sparse Matrix;Sparse Tensor;Block Sparse;Block Size Selection;Randomized Algorithm;Sampling Algorithm;Autotuning;Performance Engineering;Performance Model;Numerical Linear Algebra;Phil},}
+
+@INPROCEEDINGS{parsga,
+  author={Banerjee, Aranya and Gibney, Daniel and Xu, Helen and Aluru, Srinivas},
+  booktitle={2025 IEEE International Parallel and Distributed Processing Symposium (IPDPS)},
+  title={A Work-Optimal Parallel Algorithm for Aligning Sequences to Genome Graphs},
+  year={2025},
+  volume={},
+  number={},
+   options = {extsym={*}},
+}
+
+
+@inproceedings{10.1145/3034786.3056117,
+author = {Bender, Michael A. and Farach-Colton, Mart\'{\i}n and Johnson, Rob and Mauras, Simon and Mayer, Tyler and Phillips, Cynthia A. and Xu, Helen},
+title = {Write-Optimized Skip Lists},
+year = {2017},
+abstract = {The skip list is an elegant dictionary data structure that is commonly deployed in RAM. A skip list with N elements supports searches, inserts, and deletes in O(log N) operations with high probability (w.h.p.) and range queries returning K elements in O(log N + K) operations w.h.p.A seemingly natural way to generalize the skip list to external memory with block size B is to "promote" with probability 1/B, rather than 1/2. However, there are practical and theoretical obstacles to getting the skip list to retain its efficient performance, space bounds, and high-probability guarantees.We give an external-memory skip list that achieves write-optimized bounds. That is, for 0 < ε < 1, range queries take O(logBε N + K/B) I/Os w.h.p. and insertions and deletions take O((logBε N) / B1-ε) amortized I/Os w.h.p.Our write-optimized skip list inherits the virtue of simplicity from RAM skip lists. Moreover, it matches or beats the asymptotic bounds of prior write-optimized data structures such as the Bε \& tree or LSM trees, which are deployed in high-performance databases and file systems.The main technical challenge in proving our bounds comes from the fact that there are so few levels in the skip list, an aspect of the data structure that is essential to getting strong external-memory bounds. We use extremal-graph coloring to show that it is possible to decompose paths in the skip list into uncorrelated groups, regardless of the insertion/deletion pattern. Thus, we achieve our bounds by averaging over these uncorrelated paths rather than by averaging over uncorrelated levels, as in the standard skip list.},
+booktitle = {Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems (PODS)},
+numpages = {10},
+keywords = {write optimization, skip list, external memory, databases},
+}
+
+@inproceedings{10.1145/3210377.3210382,
+author = {Lincoln, Andrea and Liu, Quanquan C. and Lynch, Jayson and Xu, Helen},
+title = {Cache-Adaptive Exploration: Experimental Results and Scan-Hiding for Adaptivity},
+year = {2018},
+abstract = {Systems that require programs to share the cache such as shared-memory systems, multicore architectures, and time-sharing systems are ubiquitous in modern computing. Moreover, practitioners have observed that the cache behavior of an algorithm is often critical to its overall performance. Despite the increasing popularity of systems where programs share a cache, the theoretical behavior of most algorithms is not yet well understood. There is a gap between our knowledge about how algorithms perform in a static cache versus a dynamic cache where the amount of memory available to a given program fluctuates. Cache-adaptive analysis is a method of analyzing how well algorithms use the cache in the face of changing memory size. Bender ηl showed that optimal cache-adaptivity does not follow from cache-optimality in a static cache. Specifically, they proved that some cache-optimal algorithms in a static cache are suboptimal when subject to certain memory profiles (patterns of memory fluctuations). For example, the canonical cache-oblivious divide-and-conquer formulation of Strassen's algorithm for matrix multiplication is suboptimal in the cache-adaptive model because it does a linear scan to add submatrices together. In this paper, we introduce scan hiding, the first technique for converting a class of non-cache-adaptive algorithms with linear scans to optimally cache-adaptive variants. We work through a concrete example of scan-hiding on Strassen's algorithm, a sub-cubic algorithm for matrix multiplication that involves linear scans at each level of its recursive structure. All of the currently known sub-cubic algorithms for matrix multiplication include linear scans, however, so our technique applies to a large class of algorithms.},
+booktitle = {Proceedings of the 30th on Symposium on Parallelism in Algorithms and Architectures (SPAA)},
+pages = {213–222},
+numpages = {10},
+keywords = {scan hiding, external memory, cache adaptivity, adaptive constructions},
+}
+
+@INPROCEEDINGS{8547566,
+  author={Wheatman, Brian and Xu, Helen},
+  booktitle={2018 IEEE High Performance Extreme Computing Conference (HPEC)},
+  title={Packed Compressed Sparse Row: A Dynamic Graph Representation},
+  year={2018},
+  volume={},
+  number={},
+  keywords={Arrays;Sparse matrices;Benchmark testing;Indexes;Facebook;Computer science;sparse graphs;sparse matrices;storage formats;compressed sparse row;packed memory array;dynamic data structures},}
+
+@inproceedings{10.1145/3350755.3400274,
+author = {Bender, Michael A. and Chowdhury, Rezaul A. and Das, Rathish and Johnson, Rob and Kuszmaul, William and Lincoln, Andrea and Liu, Quanquan C. and Lynch, Jayson and Xu, Helen},
+title = {Closing the Gap Between Cache-oblivious and Cache-adaptive Analysis},
+year = {2020},
+abstract = {Cache-adaptive analysis was introduced to analyze the performance of an algorithm when the cache (or internal memory) available to the algorithm dynamically changes size. These memory-size fluctuations are, in fact, the common case in multi-core machines, where threads share cache and RAM. An algorithm is said to be efficiently cache-adaptive if it achieves optimal utilization of the dynamically changing cache. Cache-adaptive analysis was inspired by cache-oblivious analysis. Many (or even most) optimal cache-oblivious algorithms have an $(a,b,c)$-regular recursive structure. Such $(a, b, c)$-regular algorithms include Longest Common Subsequence, All Pairs Shortest Paths, Matrix Multiplication, Edit Distance, Gaussian Elimination Paradigm, etc. Bender et al. (2016) showed that some of these optimal cache-oblivious algorithms remain optimal even when cache changes size dynamically, but that in general they can be as much as logarithmic factor away from optimal. However, their analysis depends on constructing a highly structured, worst-case memory profile, or sequences of fluctuations in cache size. These worst-case profiles seem fragile, suggesting that the logarithmic gap may be an artifact of an unrealistically powerful adversary. We close the gap between cache-oblivious and cache-adaptive analysis by showing how to make a smoothed analysis of cache-adaptive algorithms via random reshuffling of memory fluctuations. Remarkably, we also show the limits of several natural forms of smoothing, including random perturbations of the cache size and randomizing the algorithm's starting time. Nonetheless, we show that if one takes an arbitrary profile and performs a random shuffle on when "significant events'' occur within the profile, then the shuffled profile becomes optimally cache-adaptive in expectation, even when the initial profile is adversarially constructed. These results suggest that cache-obliviousness is a solid foundation for achieving cache-adaptivity when the memory profile is not overly tailored to the algorithm structure.},
+booktitle = {Proceedings of the 32nd ACM Symposium on Parallelism in Algorithms and Architectures (SPAA)},
+numpages = {11},
+keywords = {cache-adaptive algorithms, cache-oblivious algorithms, smoothed analysis},
+}
+
+@inproceedings{10.1145/3350755.3400270,
+author = {Kamali, Shahin and Xu, Helen},
+title = {Multicore Paging Algorithms Cannot Be Competitive},
+year = {2020},
+abstract = {Every processor with multiple cores sharing a cache needs to implement a page-replacement algorithm. Lopez-Ortiz and Salinger [ITCS 2012] demonstrated that competitive ratio of canonical paging algorithms such as Least-Recently-Used (LRU) and Furthest-In-Future (FIF) grows with the length of the input. In this paper, we answer an open question about the existence of competitive multicore paging algorithms in the negative. Specifically, we show that all lazy algorithms, which include all practical algorithms, cannot be competitive against the optimal offline algorithm.},
+booktitle = {Proceedings of the 32nd ACM Symposium on Parallelism in Algorithms and Architectures (SPAA)},
+numpages = {3},
+keywords = {caching, multicore paging, online algorithms, parallel architectures},
+}
+
+@inproceedings{spma,
+author = {Brian Wheatman and Randal Burns and Aydın Buluç and Helen Xu},
+title = {Optimizing Search Layouts in Packed Memory Arrays},
+booktitle = {Proceedings of the Symposium on Algorithm Engineering and Experiments (ALENEX)},
+chapter = {},
+year={2023},
+pages = {148-161},
+    abstract = { This paper introduces Search-optimized Packed Memory Arrays (SPMAs), a collection of data structures based on Packed Memory Arrays (PMAs) that address suboptimal search via cache-optimized search layouts. Traditionally, PMAs and B-trees have tradeoffs between searches/inserts and scans: B-trees were faster for searches and inserts, while PMAs were faster for scans. Our empirical evaluation shows that SPMAs overcome this tradeoff for unsorted input distributions: on average, SPMAs are faster than B+-trees (a variant of B-trees optimized for scans) on all major operations. We generated datasets and search/insert workloads from the Yahoo! Cloud Serving Benchmark (YCSB) and found that SPMAs are about 2× faster than B+-trees regardless of the ratio of searches to inserts. On uniform random inputs, SPMAs are on average between 1.3× −2.3× faster than B+-trees on all operations. Finally, we vary the amount of sortedness in the inputs to stress the worst-case insert distribution in the PMA. We find that the worst-case B+-tree insertion throughput is about 1.5× faster than the worst-case PMA insertion throughput. However, the worst-case input for the PMA is sorted and highly unlikely to appear naturally in practice. The SPMAs maintain higher insertion throughput than the B+-tree when the input is up to 25\% sorted. }
+}
+
+@thesis{xu_thesis,
+    Author = {H. Xu},
+    Title = {The Locality-First Strategy for Developing Efficient Multicore Algorithms},
     Year = {2022},
-    Title = {Bubble dynamics with phase change near a compliant object},
-    Booktitle = {34th Symposium on Naval Hydrodynamics},
-    Address = {Washington D.C., USA},
-}
-
-@thesis{bryngelson_thesis,
-    Author = {S. H. Bryngelson},
-    Title = {Stability and transition of capsule-flow systems},
-    Year = {2017},
-    school = {University of Illinois at Urbana--Champaign},
+    school = {Massachusetts Institute of Technology},
     Note = {Ph.D. Thesis},
 }
 
 @incollection{conference_2,
-    author = {F. E. Chrit and S. Kocherla and A. Adams and J. Young and A. Alexeev and S. H. Bryngelson},
-    title = {Quantum lattice algorithms for solving partial differential equations},
-    note = {17th Conference on Theory of Quantum Computation, Communication, and Cryptography},
-    year = {2022},
-    options = {extsym={*}},
+    author = {Xu, Helen and Schardl, Tao B. and Pellauer, Michael and Emer, Joel S.},
+    title = {Optimizing Compression Schemes for Sparse Tensor Algebra},
+    note = {IEEE High Performance Extreme Computing Conference (HPEC)},
+    year = {2023},
 }
 
-@incollection{conference_1,
-    author = {S. H. Bryngelson and J. B. Freund},
-    title = {Buckling and its effect on the confined flow of a capsule suspension},
-    note = {American Physical Society},
-    year = {2015},
+@incollection{conference_3,
+    author = {Xu, Helen and Schardl, Tao B. and Pellauer, Michael and Emer, Joel S.},
+    title = {Optimizing Compression Schemes for Sparse Tensor Algebra},
+    note = {Data Compression Conference (DCC)},
+    year = {2023},
+}
+
+@incollection{conference_4,
+    author = {Sean Fraser and Helen Xu and Charles E. Leiserson},
+    title = {Work-Efficient Parallel Algorithms for Accurate
+                  Floating-Point Prefix Sums},
+    note = {IEEE High Performance Extreme Computing Conference (HPEC)},
+    year = {2020},
+}
+
+@incollection{conference_5,
+author = {Helen Xu and Sean Fraser and Charles E. Leiserson},
+title = {Multidimensional Included and Excluded Sums},
+    note = {SIAM Conference on Applied and Computational Discrete Algorithms (ACDA)},
+    year = {2021},
+}
+
+@incollection{conference_6,
+author = {Shahin Kamali and Helen Xu},
+title = {Beyond Worst-case Analysis of Multicore Caching Strategies},
+note = {Symposium on Algorithmic Principles of Computer Systems (APOCS)},
+year={2021},
+}
+
+@incollection{conference_7,
+author = {Shahin Kamali and Helen Xu},
+title = {Multicore Paging Algorithms Cannot Be Competitive},
+note = {ACM Symposium on Parallelism in Algorithms and Architectures (SPAA)},
+year={2020},
+}
+
+@incollection{conference_8,
+author = {Bender, Michael A. and Farach-Colton, Mart\'{\i}n and Johnson, Rob and Mauras, Simon and Mayer, Tyler and Phillips, Cynthia A. and Xu, Helen},
+title = {Write-Optimized Skip Lists},
+note = {ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems (PODS)},
+year={2017},
+}
+
+@incollection{conference_10,
+  author={Ahrens, Willow and Xu, Helen and Schiefer, Nicholas},
+  note={IEEE International Parallel and Distributed Processing Symposium (IPDPS)},
+  title={A Fill Estimation Algorithm for Sparse Matrices and Tensors in Blocked Formats},
+  year={2018},
+}
+
+@incollection{conference_9,
+author = {Lincoln, Andrea and Liu, Quanquan C. and Lynch, Jayson and Xu, Helen},
+title = {Cache-Adaptive Exploration: Experimental Results and Scan-Hiding for Adaptivity},
+year = {2018},
+note = {Symposium on Parallelism in Algorithms and Architectures (SPAA)},
 }
 
 @incollection{invited_25,
-  author = {{Lawrence Livermore National Laboratory, \textit{Data-driven Physics Simulation Webinar}}},
+  author = {{University of Delaware, \textit{Dynamic Graphs,
+                  End-to-End: Containers, Frameworks, and
+                  Benchmarks}}},
+  year = {2024},
+  keywords = "invited",
+   options = {extsym={*}},
+}
+
+@incollection{simons23,
+  author = {{Simons Institute for the Theory of Computing, \textit{Optimizing Dynamic-Graph Data Structures on Multicores with the Locality-First Strategy}}},
   year = {2023},
   keywords = "invited",
 }
 
-@software{mfc,
-  author = {S. H. Bryngelson and A. Radhakrishnan and H. {Le Berre} and M. Rodriguez and J.-S. Spratt and K. Schmidmayer and V. Coralic and K. Maeda and J. Meng and T. Colonius},
-  title = {{MFC}: {M}ulti-component {F}low {C}ode},
-  url = {https://mflowcode.github.io},
-  date = {2019},
+@incollection{iciam23,
+  author = {{ICIAM, \textit{Efficient Data Structures for Sparse Dynamic Graphs}}},
+  year = {2023},
+  keywords = "invited",
+}
+
+@incollection{cse23,
+  author = {{SIAM CSE, \textit{Optimizing Locality in
+Dynamic-Graph Data Structures}}},
+  year = {2023},
+  keywords = "invited",
+}
+
+@incollection{bebop22,
+  author = {{UC Berkeley, \textit{A Fill Estimation Algorithm for Sparse Matrices and Tensors
+in Blocked Formats}}},
+  year = {2022},
+  keywords = "invited",
+}
+
+@incollection{tau19,
+  author = {{Tel Aviv University, \textit{A Fill Estimation Algorithm for Sparse Matrices and Tensors
+in Blocked Formats}}},
+  year = {2019},
+  keywords = "invited",
+}
+
+@incollection{lbl22,
+  author = {{Lawrence Berkeley National Laboratory, \textit{Optimizing Dynamic Graph Processing on Multicores with the Locality-First Strategy}}},
+  year = {2022},
+  keywords = "invited",
+}
+
+@incollection{williams21,
+  author = {{Williams College, \textit{Data Structure Design for Skewed Dynamic Graph Processing}}},
+  year = {2021},
+  keywords = "invited",
+}
+
+@incollection{sbu21,
+  author = {{Stony Brook University, \textit{Optimizing Data Movement in Sparse Graph Processing}}},
+  year = {2021},
+  keywords = "invited",
+}
+
+@incollection{mit21,
+  author = {{MIT Fast Code Seminar, \textit{Data Structure Design for Skewed Dynamic Graph Processing}}},
+  year = {2021},
+  keywords = "invited",
+}
+
+@incollection{invited_3,
+  author = {{Dagstuhl Seminar, \textit{Developing and Benchmarking Large-Scale Dynamic-Graph Containers}}},
+  year = {2024},
+  keywords = "invited",
+   options = {extsym={*}},
+}
+
+@incollection{invited_2,
+  author = {{Boston University, \textit{Recent Advances on In-Memory Cache-Friendly Data Structures}}},
+  year = {2024},
+  keywords = "invited",
+   options = {extsym={*}},
+}
+
+@incollection{invited,
+  author = {{Cornell University, \textit{Recent Advances on In-Memory Cache-Friendly Data Structures}}},
+  year = {2024},
+  keywords = "invited",
+   options = {extsym={*}},
+}
+
+@software{byocode,
+  author = {Wheatman, Brian and Dong, Xiaojun and Shen, Zheqi and Dhulipala, Laxman and \L{}\k{a}cki, Jakub and Pandey, Prashant and Xu, Helen},
+  title = {BYO},
+  url = {https://github.com/wheatman/BYO},
+  date = {2024},
+   options = {extsym={*}},
+}
+
+@software{pcsrcode,
+  author = {Wheatman, Brian and Xu, Helen},
+  title = {Packed Compressed Sparse Row},
+  url = {https://github.com/wheatman/Packed-Compressed-Sparse-Row},
+  date = {2018},
+}
+
+@software{terracecode,
+  author = {Pandey, Prashant and Wheatman, Brian and Xu, Helen and Buluc, Aydin},
+  title = {Terrace},
+  url = {https://github.com/PASSIONLab/terrace},
+  date = {2021},
+}
+
+@software{cpmacode,
+  author = {Wheatman, Brian and Burns, Randal and Buluc, Aydin and Xu, Helen},
+  title = {Compressed Packed Memory Array},
+  url = {https://github.com/wheatman/Packed-Memory-Array},
+  date = {2024},
+   options = {extsym={*}},
+}
+
+@software{bptreecode,
+  author = {Xu, Helen and Li, Amanda and Wheatman, Brian and Marneni, Manoj and Pandey, Prashant},
+  title = {BP-Tree},
+  url = {https://github.com/wheatman/BP-Tree},
+  date = {2023},
 }

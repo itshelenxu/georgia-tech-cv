@@ -79,6 +79,10 @@
    \blx@bibliography\blx@tempa}{}{}
 \makeatother
 
+\makeatletter
+\def\blx@err@patch#1{}
+\makeatother
+
 \newcounter{bibitemtotal}
 \newrobustcmd*{\mkbibdesc}[1]{%
   \number\numexpr\value{bibitemtotal}+1-#1\relax}
@@ -94,7 +98,7 @@
   {\item}
 
 % Set spacing in itemize
-\setlist{itemsep=3pt,topsep=3pt,parsep=0pt,partopsep=0pt} 
+\setlist{itemsep=3pt,topsep=3pt,parsep=0pt,partopsep=0pt}
 
 % Set spacing around titles (syntax: spacing left, before, after)
 \usepackage{titlesec}
@@ -121,7 +125,7 @@
 \renewcommand{\contentsname}{\Large Table of Contents}
 
 % Use Gatech-required section number schemes
-\renewcommand{\thesection}{\Roman{section}.} 
+\renewcommand{\thesection}{\Roman{section}.}
 \renewcommand{\thesubsection}{\Alph{subsection}.}
 \renewcommand{\thesubsubsection}{\Alph{subsection}\arabic{subsubsection}.}
 
@@ -139,3 +143,8 @@
 \renewbibmacro*{begentry}{\printtext{\bib@extsym\xspace}}
 \makeatother
 
+
+%%% Local Variables:
+%%% mode: plain-tex
+%%% TeX-master: "cv"
+%%% End:
